@@ -13,4 +13,4 @@ link:
 	g++ $(OBJ) -o $(APP)
 
 clean:
-	rm -rf $(APP) $(OBJ)
+	rm -rf $(APP) $(OBJ) *o

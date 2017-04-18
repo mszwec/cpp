@@ -1,6 +1,6 @@
 APP= egzamin
 SRC= *.c
-OBJ= main.o
+OBJ= kapitalizacja.o main.o
 
 CFLAGS=-c -g -Wall
 

@@ -108,6 +108,11 @@ int mnozenie(int a)
 
 int main(int argc, char** argv)
 {
+    if(argc < 2)
+    {
+        cout << "Usage: egzamin <int number>"<<endl;
+        return 1;
+    }
 
     char c[]= {"Ala ma kota"};
     int input=0;
