@@ -1,4 +1,5 @@
 #include <iostream>
+#include <typeinfo>
 #include <stdio.h>
 
 typedef char sort_t;
@@ -75,7 +76,16 @@ int main()
 {
     sort_t tab[]={6,3,2,9,6,4,3,1,0,9,7};
     int n=sizeof(tab)/sizeof(sort_t);
-    
+
+    char *c = "test";
+    signed long a[3] = {0};
+    int b =1;
+
+    cout << typeid("test").name() << endl;
+    cout << typeid(c).name() << endl;
+    cout << typeid(a).name() << endl;
+    cout << typeid(b).name() << endl;
+
     quicksort(tab, 0 , n-1);
 
         for(int i=n-1; i>=0; i--)

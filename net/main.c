@@ -10,6 +10,8 @@
 #include <arpa/inet.h>
 #include <netinet/in.h>
 
+#define PORT "3490"
+
 int main(int argc, char *argv[])
 {
     struct addrinfo hints, *res, *p;
@@ -52,8 +54,30 @@ int main(int argc, char *argv[])
         inet_ntop(p->ai_family, addr, ipstr, sizeof ipstr);
         printf("  %s: %s\n", ipver, ipstr);
     }
-
     freeaddrinfo(res); // free the linked list
+
+
+
+
+
+    // SOCKET and BIND
+
+    memset(&hints, 0, sizeof hints);
+    hints.ai_family = AF_UNSPEC;  // use IPv4 or IPv6, whichever
+    hints.ai_socktype = SOCK_STREAM;
+    hints.ai_flags = AI_PASSIVE;     // fill in my IP for me
+
+    getaddrinfo(NULL, PORT, &hints, &res);
+
+    int s = socket(res->ai_family, res->ai_socktype, res->ai_protocol);
+ 
+    if (s < 0)
+    {
+        fprintf(stderr, "socket descriptor error\n");
+        return 2;
+    }
+    
+    bind(s, res->ai_addr, res->ai_addrlen);
 
     return 0;
 }
