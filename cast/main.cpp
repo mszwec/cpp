@@ -5,38 +5,61 @@ using namespace std;
 
 class A
 {
-    private:
-        int a;
-      //  double b;
-
     public:
-        A(){};
-        A(int a): a(a){};
-      //  A(double a): b(a){};
+        int a;
+        int *p;
 
-        ~A()
+        A(){ a=1; p=new int(11); };
+        A(int a): a(a){};
+
+        virtual ~A()
         {
-          cout<<"dest"<<endl;  
+          cout<<"dest A"<<endl;  
         };
-        /*
+
         operator int() const
         {
             return a;
         }
-        */
+
+        virtual A* clone()
+        {
+            A * ret = new A();
+            if(p && ret->p)
+                *(ret->p) = *p;
+
+            return ret;
+        }
+
 };
+
+class B: public A
+{
+    public:
+        int y;
+
+        B(): A(){y=12;};
+
+        ~B(){cout<<"dest B"<<endl;};
+
+        virtual B* clone()
+        {
+            B * ret = new B();
+            if(p && ret->p)
+                *(ret->p) = *p;
+
+            ret->y=y;
+
+            return ret;
+        }
+};
+
 
 int main()
 {
-//    A ob;
-  A  ob = 2;
+    A *a = new B();
+    cout << *(a->p)<<endl;
 
-    /*
-    A ob2;
-    ob2 = 4.;
-*/
-    int x;
-    x = ob;
-
-    cout<<x<<endl;
+    A *b = a->clone();
+    cout<<(dynamic_cast<B*>(b))->y << endl;
 }
