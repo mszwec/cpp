@@ -9,6 +9,7 @@ int g=1; //globalna
 int h=1; //globalna
 
 // THIS IS A TEST CHANGE
+// THIS IS ANOTHER TEST CHANGE 2
 
 struct S
 {
