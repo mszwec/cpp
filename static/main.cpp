@@ -8,6 +8,7 @@ using namespace std;
 int g=1; //globalna
 int h=1; //globalna
 
+// THIS IS A TEST CHANGE
 
 struct S
 {
