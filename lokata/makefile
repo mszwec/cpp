@@ -19,4 +19,4 @@ link:
 	g++ $(LFLAGS) $(OBJ) $(LIB) -o $(APP)
 
 clean:
-	rm -rf $(APP)
+	rm -rf $(APP) $(LIBOBJ) $(LIB) $(OBJ)
