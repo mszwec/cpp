@@ -3,7 +3,7 @@
 APP= c11
 SRC= *c
 
-CFLAGS= -g 
+CFLAGS= -g -std=c++11
 
 all:
 	g++ $(SRC) $(CFLAGS) -o $(APP)

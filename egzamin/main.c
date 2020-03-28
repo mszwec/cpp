@@ -87,30 +87,30 @@ string function3(char *s)
     return c;
 }
 
-int mnozenie(int a)
+int mnozenie(int a, int b)
 {
     if(a==0)
         return a;
 
     int reszta = a%2;
-    int wynik=0;
+    int krotnoscDwojki = a - reszta;
+    int wynik = 0;
 
-    wynik = 67<<(int)(log10(a-reszta)/log10(2));
+    wynik = b << static_cast<int>((log10(krotnoscDwojki)/log10(2)));
 
     if(reszta>0)
     {
-        wynik += 67;
+        wynik += b;
     }    
     
     return wynik;
-
 }
 
 int main(int argc, char** argv)
 {
-    if(argc < 2)
+    if(argc < 3)
     {
-        cout << "Usage: egzamin <int number>"<<endl;
+        cout << "Usage: egzamin <int number> <int number>"<<endl;
         return 1;
     }
 
@@ -118,6 +118,7 @@ int main(int argc, char** argv)
     int input=0;
 
     input=  atoi(argv[1]);
+    int input2=  atoi(argv[2]);
 
     cout << c << endl;
     char * f = function(c) ;
@@ -127,7 +128,7 @@ int main(int argc, char** argv)
 
 cout << "\nf2: " << f2 << endl;
 cout << input <<endl;
-cout<< mnozenie(input) << endl;
+cout<< "Wynik mnożenia: " << mnozenie(input, input2) << endl;
 
 free(f2);
 free(f);

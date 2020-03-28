@@ -5,61 +5,80 @@ using namespace std;
 
 class A
 {
-    public:
-        int a;
-        int *p;
+  public:
+    int a       { 1 };
+    int *valPtr { new int (11) };
 
-        A(){ a=1; p=new int(11); };
-        A(int a): a(a){};
+    A() = default;
 
-        virtual ~A()
-        {
-          cout<<"dest A"<<endl;  
-        };
+    A(int input)
+      : a(input)
+    {};
 
-        operator int() const
-        {
-            return a;
-        }
+    virtual ~A()
+    {
+      cout<<"dest A"<<endl;  
+    };
 
-        virtual A* clone()
-        {
-            A * ret = new A();
-            if(p && ret->p)
-                *(ret->p) = *p;
+    operator int() const
+    {
+      return a;
+    }
 
-            return ret;
-        }
+    virtual A* clone()
+    {
+      A* ret = new A();
+
+      if(valPtr && ret->valPtr)
+        *(ret->valPtr) = *valPtr;
+
+      return ret;
+    }
 
 };
 
 class B: public A
 {
-    public:
-        int y;
+  public:
+    int y { 12 };
 
-        B(): A(){y=12;};
+    B() = default;
 
-        ~B(){cout<<"dest B"<<endl;};
+    B(int in)
+    : y(in)
+    {}
 
-        virtual B* clone()
-        {
-            B * ret = new B();
-            if(p && ret->p)
-                *(ret->p) = *p;
+    ~B()
+    {
+      cout<<"dest B"<<endl;
+    }
 
-            ret->y=y;
+    virtual B* clone()
+    {
+      B * ret = new B();
+      if(valPtr && ret->valPtr)
+        *(ret->valPtr) = *valPtr;
 
-            return ret;
-        }
+      ret->y=y;
+
+      return ret;
+    }
 };
 
 
 int main()
 {
-    A *a = new B();
-    cout << *(a->p)<<endl;
+  A* a = new B(69);
+  cout << *(a->valPtr) << endl;
 
-    A *b = a->clone();
-    cout<<(dynamic_cast<B*>(b))->y << endl;
+  A* b = a->clone();
+  // IF above clone() was a B::clone() then b->y should be 69;
+  cout << (dynamic_cast<B*>(b))->y << endl;
+  cout << (static_cast<B*>(b))->y << endl;
+
+  A& refC = *(a->clone());
+  cout << (static_cast<B&>(refC)).y << endl;
+
 }
+
+
