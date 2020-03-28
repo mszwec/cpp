@@ -2,7 +2,7 @@ APP= cpp
 SRC= *.c
 OBJ= main.o
 
-CFLAGS=-c -g -Wall
+CFLAGS=-c -g -Wall -std=c++17
 
 all: clean compile link
 

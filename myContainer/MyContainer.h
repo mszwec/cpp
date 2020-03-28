@@ -19,13 +19,13 @@ class MyContainer
       public:
         iterator()
         {
-          cout<<"iterator Default Costructor"<<endl;
+          cout<<"MyContainer::iterator Default Costructor"<<endl;
         }
 
         iterator(value_type* addr)
         : address(addr)
         {
-          cout<<"iterator Costructor"<<endl;
+          cout<<"MyContainer::iterator Costructor"<<endl;
         }
 
         reference operator* ()
@@ -90,14 +90,14 @@ class MyContainer
 template <typename T>
 MyContainer<T>::MyContainer(void)
 {
-  cout<<"Constructor"<<endl;
+  cout<<"MyContainer::Constructor"<<endl;
   it = new iterator();
 }
 
 template <typename T>
 MyContainer<T>::MyContainer(const MyContainer& old)
 {
-  cout<<"Copy constructor"<<endl;
+  cout<<"MyContainer::Copy constructor"<<endl;
   it = new iterator();
   size_val = old.size_val;
   reserved = old.reserved;
