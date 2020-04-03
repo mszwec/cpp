@@ -1,4 +1,4 @@
-APP= sort
+APP= builder
 SRC= main.cpp
 OBJ= main.o
 CC=g++

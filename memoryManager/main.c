@@ -11,6 +11,26 @@
 
 using namespace std;
 
+template <typename T>
+void printBits(T* ptr)
+{
+  using byte = unsigned char;
+
+  const byte* beginAddr = reinterpret_cast<const byte*>(ptr);
+  const byte* endAddr   = beginAddr + sizeof(T);
+
+  auto printMe = [&](const byte* bit)
+  {
+    cout << bitset<8*sizeof(byte)>(*bit);
+  };
+
+  for (const byte* addr = beginAddr; addr < endAddr; addr++)
+  {
+    printMe(addr);
+  }
+
+}
+
 class MemoryManager
 {
   void          *FreeStoreHead  { nullptr };
@@ -42,6 +62,7 @@ public:
 //    cout << std::bitset<8*sizeof(pt)>(pt) << endl;
 //    memset(pt, '\0', sizeof(*pt));
 //    pt = (void*)0;
+    printBits(pt);
   }
 };
 
@@ -58,6 +79,7 @@ void operator delete(void* pt)
   cout << "delete called" << endl;
   gMM.free(pt);
 }
+
 
 int main(int argc, char** argv)
 {
@@ -102,14 +124,14 @@ int main(int argc, char** argv)
     }
   };
 
-
+  printBits(mc2);
+  cout << endl;
   delete mc2;
 
   if (mc2)
   {
     mc2->push_back(56);
     cout << "main:: mc2 not freed" << endl;
-    print(*mc2);
   }
   else
     cout << "main:: mc2 freed" << endl;

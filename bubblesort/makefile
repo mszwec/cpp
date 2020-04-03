@@ -5,10 +5,11 @@ CC=g++
 
 CFLAGS=-c -g -Wall
 
+.PHONY=clean compile link
 all: clean compile link
 
-compile:
-	$(CC) $(CFLAGS) $(SRC)
+compile: *.h
+	$(CC) $(CFLAGS) $(SRC) -o $(OBJ)
 
 link:
 	$(CC) $(OBJ) -o $(APP)
